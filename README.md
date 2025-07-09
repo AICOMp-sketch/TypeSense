@@ -1,6 +1,6 @@
 # TypeSense (GoogleGemini) 
 
-![My Screenshot](Images/Image1.png)
+![My Screenshot](Images/Image1.PNG)
 
 "TypeSense" is an elegant web component designed to transform a mundane loading screen into an engaging, human-like interaction. 
 
