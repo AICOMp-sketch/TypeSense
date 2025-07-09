@@ -1,0 +1,125 @@
+:root {
+    --bubble-bg: #e0e0e0;
+    --bubble-text-color: #333;
+    --dot-color: rgba(51, 51, 51, 0.7);
+    --animation-speed: 0.8s; /* Speed of the dot animation */
+    --avatar-size: 45px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Soft, modern background */
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    margin: 0;
+}
+
+.message-container {
+    display: flex;
+    align-items: flex-end; /* Align avatar and bubble to the bottom */
+    gap: 15px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.8s ease-out forwards;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.avatar {
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    border-radius: 50%;
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe); /* Gradient avatar */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+}
+
+.message-bubble {
+    background: var(--bubble-bg);
+    border-radius: 20px 20px 20px 5px; /* Speech bubble shape */
+    padding: 15px 20px;
+    color: var(--bubble-text-color);
+    font-size: 1.1em;
+    font-weight: 400;
+    display: inline-flex; /* Use flexbox for text and dots */
+    align-items: center;
+    max-width: 300px; /* Limit bubble width */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.message-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -10px; /* Position the tail */
+    width: 20px;
+    height: 20px;
+    background: var(--bubble-bg);
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%); /* Create the triangle shape */
+    transform: rotate(45deg);
+    border-radius: 0 0 5px 0;
+    z-index: -1; /* Behind the bubble */
+}
+
+#typing-text {
+    overflow: hidden; /* Hide overflowing text before it's typed */
+    white-space: nowrap; /* Keep text on a single line */
+    margin-right: 5px; /* Space between text and dots */
+    flex-shrink: 1; /* Allow text to shrink if necessary */
+    min-width: 5px; /* Ensures space even when empty */
+}
+
+.typing-dots {
+    display: flex;
+    align-items: center;
+    line-height: 1; /* Ensure dots align well */
+    margin-left: 5px;
+    transform: translateY(2px); /* Slight adjustment for visual alignment */
+}
+
+.typing-dots span {
+    display: inline-block;
+    width: 5px; /* Size of each dot */
+    height: 5px;
+    background-color: var(--dot-color);
+    border-radius: 50%;
+    margin: 0 2px; /* Space between dots */
+    opacity: 0;
+    animation: fadeDot var(--animation-speed) infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: calc(var(--animation-speed) / 3);
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: calc(var(--animation-speed) / 1.5);
+}
+
+@keyframes fadeDot {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-3px); /* Pop up slightly */
+    }
+}
